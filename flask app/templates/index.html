@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+
+{% block head %}
+
+{% endblock %}
+
+{%block body %}
+<header class="hero">
+  <div class="hero-content">
+    <div>
+      <ul>
+          <li>Home</li> 
+          <li>About</li>       
+                 
+      </ul>
+    </div>
+      <h1>Welcome to the Food Distribution App</h1>
+      <p>Connecting farmers, distributors, and communities for a better tomorrow.</p>
+      <a href="{{ url_for('login') }}" class="btn">Get Started</a>
+
+  </div>
+</header>
+
+<section class="features">
+  <h2>Our Features</h2>
+  <div class="features-grid">
+      <div class="feature">
+          <h3>For Farmers</h3>
+          <p>Easily list your crops and connect with distributors.</p>
+      </div>
+      <div class="feature">
+          <h3>For Distributors</h3>
+          <p>Find fresh produce and manage your supplies efficiently.</p>
+      </div>
+      <div class="feature">
+          <h3>For Communities</h3>
+          <p>Contribute and support food security initiatives.</p>
+      </div>
+  </div>
+</section>
+
+<section class="about">
+  <h2>About Us</h2>
+  <p>At Food Distribution App, we aim to minimize food waste and ensure equitable access to resources by connecting all stakeholders in the food supply chain.</p>
+</section>
+
+<footer>
+  <p>© 2024 Food Distribution App. All rights reserved.</p>
+  <div class="social-links">
+      <a href="#">Facebook</a>
+      <a href="#">Twitter</a>
+      <a href="#">LinkedIn</a>
+  </div>
+</footer>
+
+
+{% endblock %}

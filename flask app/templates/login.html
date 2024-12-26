@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> food distribution app- Login/Signup</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 400px;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .header {
+            background-color: #4caf50;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .form-container {
+            padding: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input {
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .error {
+            color: red;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+
+        button {
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            background-color: #4caf50;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .toggle {
+            text-align: center;
+            margin-top: 10px;
+            color: #4caf50;
+            cursor: pointer;
+        }
+
+        .toggle:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h2 id="form-title">Login</h2>
+        </div>
+        <div class="form-container">
+            <form id="auth-form">
+                <div id="name-field" style="display: none;">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" placeholder="Enter your full name">
+                    <div id="nameError" class="error"></div>
+                </div>
+
+                <label for="email">Email</label>
+                <input type="email" id="email" placeholder="Enter your email">
+                <div id="emailError" class="error"></div>
+
+                <label for="password">Password</label>
+                <input type="password" id="password" placeholder="Enter your password">
+                <div id="passwordError" class="error"></div>
+
+                <div id="confirm-password-field" style="display: none;">
+                    <label for="confirmPassword">Confirm Password</label>
+                    <input type="password" id="confirmPassword" placeholder="Confirm your password">
+                    <div id="confirmPasswordError" class="error"></div>
+                </div>
+
+                <button type="button" onclick="handleFormSubmit()">Submit</button>
+                <div id="confirmationMessage" style="color: green; margin-top: 10px;"></div>
+            </form>
+            <div class="toggle" id="toggle-link">Don't have an account? Sign up</div>
+        </div>
+    </div>
+
+    <script>
+        const formTitle = document.getElementById('form-title');
+        const nameField = document.getElementById('name-field');
+        const confirmPasswordField = document.getElementById('confirm-password-field');
+        const toggleLink = document.getElementById('toggle-link');
+
+        let isSignup = false;
+
+        // Form Data Object
+        let formData = {};
+
+        // Toggle between Login and Signup
+        toggleLink.addEventListener('click', () => {
+            isSignup = !isSignup;
+
+            if (isSignup) {
+                formTitle.textContent = 'Sign Up';
+                nameField.style.display = 'block';
+                confirmPasswordField.style.display = 'block';
+                toggleLink.textContent = 'Already have an account? Login';
+            } else {
+                formTitle.textContent = 'Login';
+                nameField.style.display = 'none';
+                confirmPasswordField.style.display = 'none';
+                toggleLink.textContent = "Don't have an account? Sign up";
+            }
+        });
+
+        // Handle Form Submission
+        function handleFormSubmit() {
+            // Clear previous errors
+            clearErrors();
+
+            // Capture form data
+            formData.name = document.getElementById("name").value.trim();
+            formData.email = document.getElementById("email").value.trim();
+            formData.password = document.getElementById("password").value.trim();
+            formData.confirmPassword = document.getElementById("confirmPassword")?.value.trim();
+
+            // Validate form data
+            if (validateForm()) {
+                const action = isSignup ? 'Sign Up' : 'Login';
+                alert(`${action} successful!`);
+                document.getElementById("confirmationMessage").innerText = `${action} successful!`;
+            }
+        }
+
+        // Validation function
+        function validateForm() {
+            let isValid = true;
+
+            // Name validation
+            if (isSignup && !formData.name) {
+                document.getElementById("nameError").innerText = "Name is required.";
+                isValid = false;
+            }
+
+            // Email validation
+            if (!validateEmail(formData.email)) {
+                document.getElementById("emailError").innerText = "Please enter a valid email.";
+                isValid = false;
+            }
+
+            // Password validation
+            if (!formData.password) {
+                document.getElementById("passwordError").innerText = "Password is required.";
+                isValid = false;
+            } else if (formData.password.length < 8) {
+                document.getElementById("passwordError").innerText = "Password must be at least 8 characters long.";
+                isValid = false;
+            }
+
+            // Confirm password validation
+            if (isSignup && formData.password !== formData.confirmPassword) {
+                document.getElementById("confirmPasswordError").innerText = "Passwords do not match.";
+                isValid = false;
+            }
+
+            return isValid;
+        }
+
+        // Helper function to validate email format
+        function validateEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+
+        // Clear previous error messages
+        function clearErrors() {
+            document.querySelectorAll(".error").forEach(error => error.innerText = "");
+            document.getElementById("confirmationMessage").innerText = "";
+        }
+    </script>
+</body>
+</html>

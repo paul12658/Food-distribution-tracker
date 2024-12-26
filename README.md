@@ -1,6 +1,8 @@
 # Food-distribution-tracker
 
-The **Food Distribution Tracker** is a Python Flask-based application designed to help organizations efficiently manage food inventory, donors, and distribution to minimize waste and ensure equitable food distribution.
+The Food Distribution Tracker is a Python Flask-based application designed to help organizations efficiently manage food inventory, donors, and distribution to minimize waste and ensure equitable food distribution.
+
+# NB: I am still going on with the project to completion
 
 ---
 
@@ -19,6 +21,7 @@ The **Food Distribution Tracker** is a Python Flask-based application designed t
 - Flask
 - Virtual Environment (venv)
 - MySQL (or other database, configurable)
+- Mysqlachemy
 
 ---
 
@@ -83,7 +86,7 @@ $ pip install -r requirements.txt
 ### Step 5: Run the Application
 ```bash
 # Start the Flask development server
-$ flask run
+$ ./app.py  to run the app in the terminal
 ```
 
 - The application will be accessible at `http://127.0.0.1:5000/`.
@@ -143,7 +146,6 @@ food-distribution-tracker/
 1. Fork the repository.
 2. Create a new branch:
 
-
----
+For any queries contact at aloopaul6@gmail.com 
 
 
